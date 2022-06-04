@@ -16,41 +16,40 @@ Tetris::Tetris()
 
 void Tetris::run()
 {
-    Field field;
-    Figure *figure;
-
-    figure = new Stick;
+    active_figure_ = new Stick;
 
     while (true)
     {
         system("clear");
-        field.draw_field();
+        field_.draw_field();
         auto user_input = sleep_or_proccess_user_action();
         if ( user_input == eActions::LEFT) {
-            figure->move_left();
+            active_figure_->move_left();
         } else if (user_input == eActions::RIGHT) {
-            figure->move_right();
+            active_figure_->move_right();
         } else if ( user_input == eActions::UP) {
-            figure->rotate();
+            active_figure_->rotate();
         }
 
-        auto new_figure_coord =  figure->get_figure_coord();
+        auto new_figure_coord =  active_figure_->get_figure_coord();
         bool need_to_clear = true;
 
-        if( field.is_border_left_right(new_figure_coord)) {
-            figure->return_to_old_coord();
+        if( field_.is_border_left_right(new_figure_coord)) {
+            active_figure_->return_to_old_coord();
             need_to_clear = false;
         }
 
-        if (field.is_suitable_to_move(new_figure_coord)) {
+        if (field_.is_suitable_to_move(new_figure_coord)) {
             if ( need_to_clear) {
-                field.clear_old_figure_coord(figure->get_figure_coord_old());
+                field_.clear_old_figure_coord(active_figure_->get_figure_coord_old());
             }
-            field.draw_new_figure_coord(new_figure_coord);
-            figure->move_down();
+            field_.draw_new_figure_coord(new_figure_coord);
+            active_figure_->move_down();
         } else {
-            delete figure;
-            figure = new Stick;
+            if ( active_figure_ ) {
+                delete active_figure_;
+                active_figure_ = new Stick;
+            }
         }
     }
 }
