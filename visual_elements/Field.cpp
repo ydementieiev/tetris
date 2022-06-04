@@ -57,7 +57,13 @@ void Field::clear_old_figure_coord(const coord &figure_coord)
 
 bool Field::is_possible_to_move_down(const coord &figure_coord)
 {
-    if (is_border_from_bottom(figure_coord)) {
+    if (is_border_from_bottom(figure_coord))
+    {
+        return false;
+    }
+
+    if (is_other_figure_from_bottom(figure_coord))
+    {
         return false;
     }
 
@@ -66,7 +72,8 @@ bool Field::is_possible_to_move_down(const coord &figure_coord)
 
 bool Field::is_possible_to_move_left(const coord &figure_coord)
 {
-    if (is_border_on_left_side(figure_coord)) {
+    if (is_border_on_left_side(figure_coord))
+    {
         return false;
     }
 
@@ -75,7 +82,8 @@ bool Field::is_possible_to_move_left(const coord &figure_coord)
 
 bool Field::is_possible_to_move_right(const coord &figure_coord)
 {
-    if (is_border_on_right_side(figure_coord)) {
+    if (is_border_on_right_side(figure_coord))
+    {
         return false;
     }
 
@@ -121,6 +129,49 @@ bool Field::is_border_on_right_side(const coord &figure_coord)
         if (is_border)
         {
             return true;
+        }
+    }
+
+    return false;
+}
+
+bool Field::is_other_figure_from_bottom(const coord &figure_coord)
+{
+    for (int active_block_index = 0; active_block_index < BLOCK_COUNT; active_block_index++)
+    {
+        // Check that below current block not another block.
+        const int next_row_to_active_block = figure_coord.row[active_block_index] + 1;
+        const int column_active_block = figure_coord.column[active_block_index];
+        const bool is_other_block_below = FIELD[next_row_to_active_block][column_active_block] == BLOCK;
+
+        bool same_fugire_below = false;
+
+        if (is_other_block_below)
+        {
+            // Check that block below not from current figure.
+            for (int other_block_index = 0; other_block_index < BLOCK_COUNT; other_block_index++)
+            {
+                if (other_block_index == active_block_index)
+                {
+                    // Skip comparing the same block.
+                    continue;
+                }
+                const int other_block_row = figure_coord.row[other_block_index];
+                const int other_block_column = figure_coord.column[other_block_index];
+
+                const bool same_row = next_row_to_active_block == other_block_row;
+                const bool same_column = column_active_block == other_block_column;
+                if (same_row && same_column)
+                {
+                    same_fugire_below = true;
+                    break;
+                }
+            }
+
+            if (!same_fugire_below)
+            {
+                return true;
+            }
         }
     }
 

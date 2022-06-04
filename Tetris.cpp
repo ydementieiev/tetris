@@ -7,7 +7,7 @@
 #include "Figure.h"
 #include "Stick.h"
 
-const int DELAY = 1000;
+const int DELAY = 500;
 
 Tetris::Tetris()
 {
@@ -19,14 +19,18 @@ void Tetris::run()
 
     while (true)
     {
-        if (field_.is_possible_to_move_down(active_figure_->get_figure_coord())) {
+        if (field_.is_possible_to_move_down(active_figure_->get_figure_coord()))
+        {
             active_figure_->move_down();
             field_.clear_old_figure_coord(active_figure_->get_figure_coord_old());
             field_.update_new_figure_coord(active_figure_->get_figure_coord());
             field_.draw_field();
             sleep_or_proccess_user_action();
-        } else {
-            if ( active_figure_ ) {
+        }
+        else
+        {
+            if (active_figure_)
+            {
                 delete active_figure_;
                 active_figure_ = new Stick;
             }
@@ -69,7 +73,8 @@ void Tetris::sleep_or_proccess_user_action()
         switch (user_input)
         {
         case eActions::LEFT:
-            if(field_.is_possible_to_move_left(active_figure_->get_figure_coord())) {
+            if (field_.is_possible_to_move_left(active_figure_->get_figure_coord()))
+            {
                 active_figure_->move_left();
                 field_.clear_old_figure_coord(active_figure_->get_figure_coord_old());
                 field_.update_new_figure_coord(active_figure_->get_figure_coord());
@@ -77,7 +82,8 @@ void Tetris::sleep_or_proccess_user_action()
             }
             break;
         case eActions::RIGHT:
-            if(field_.is_possible_to_move_right(active_figure_->get_figure_coord())) {
+            if (field_.is_possible_to_move_right(active_figure_->get_figure_coord()))
+            {
                 active_figure_->move_right();
                 field_.clear_old_figure_coord(active_figure_->get_figure_coord_old());
                 field_.update_new_figure_coord(active_figure_->get_figure_coord());

@@ -22,6 +22,8 @@ private:
     bool is_border_on_left_side(const coord &figure_coord);
     bool is_border_on_right_side(const coord &figure_coord);
 
+    bool is_other_figure_from_bottom(const coord &figure_coord);
+
     bool is_figure(coord figure_coord);
     void fill_field_by_default();
 
