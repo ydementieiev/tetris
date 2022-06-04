@@ -33,8 +33,10 @@ void Field::fill_field_by_default()
     }
 }
 
-void Field::update_new_figure_coord(const coord &figure_coord)
+void Field::update_new_figure_coord(const Figure *figure)
 {
+    const auto figure_coord = figure->get_figure_coord();
+
     for (int i = 0; i < BLOCK_COUNT; i++)
     {
         if (figure_coord.row[i] > 0 && figure_coord.column[i] > 0)
@@ -44,35 +46,27 @@ void Field::update_new_figure_coord(const coord &figure_coord)
     }
 }
 
-void Field::clear_old_figure_coord(const coord &figure_coord)
+void Field::clear_old_figure_coord(const Figure *figure)
 {
+    const auto figure_coord_old = figure->get_figure_coord_old();
+
     for (int i = 0; i < BLOCK_COUNT; i++)
     {
-        if (figure_coord.row[i] > 0 && figure_coord.column[i] > 0)
+        if (figure_coord_old.row[i] > 0 && figure_coord_old.column[i] > 0)
         {
-            FIELD[figure_coord.row[i]][figure_coord.column[i]] = EMPTY;
+            FIELD[figure_coord_old.row[i]][figure_coord_old.column[i]] = EMPTY;
         }
     }
 }
 
-bool Field::is_possible_to_move_down(const coord &figure_coord)
+bool Field::is_possible_to_move_down(const Figure *figure)
 {
-    if (is_border_from_bottom(figure_coord))
+    if (is_border_from_bottom(figure))
     {
         return false;
     }
 
-    if (is_other_figure_from_bottom(figure_coord))
-    {
-        return false;
-    }
-
-    return true;
-}
-
-bool Field::is_possible_to_move_left(const coord &figure_coord)
-{
-    if (is_border_on_left_side(figure_coord))
+    if (is_other_figure_from_bottom(figure))
     {
         return false;
     }
@@ -80,9 +74,14 @@ bool Field::is_possible_to_move_left(const coord &figure_coord)
     return true;
 }
 
-bool Field::is_possible_to_move_right(const coord &figure_coord)
+bool Field::is_possible_to_move_left(const Figure *figure)
 {
-    if (is_border_on_right_side(figure_coord))
+    if (is_border_on_left_side(figure))
+    {
+        return false;
+    }
+
+    if (is_other_figure_on_left_side(figure))
     {
         return false;
     }
@@ -90,8 +89,20 @@ bool Field::is_possible_to_move_right(const coord &figure_coord)
     return true;
 }
 
-bool Field::is_border_from_bottom(const coord &figure_coord)
+bool Field::is_possible_to_move_right(const Figure *figure)
 {
+    if (is_border_on_right_side(figure))
+    {
+        return false;
+    }
+
+    return true;
+}
+
+bool Field::is_border_from_bottom(const Figure *figure)
+{
+    const auto figure_coord = figure->get_figure_coord();
+
     for (int i = 0; i < BLOCK_COUNT; i++)
     {
         const int next_row = figure_coord.row[i] + 1;
@@ -105,8 +116,10 @@ bool Field::is_border_from_bottom(const coord &figure_coord)
     return false;
 }
 
-bool Field::is_border_on_left_side(const coord &figure_coord)
+bool Field::is_border_on_left_side(const Figure *figure)
 {
+    const auto figure_coord = figure->get_figure_coord();
+
     for (int i = 0; i < BLOCK_COUNT; i++)
     {
         const int prev_column = figure_coord.column[i] - 1;
@@ -120,8 +133,10 @@ bool Field::is_border_on_left_side(const coord &figure_coord)
     return false;
 }
 
-bool Field::is_border_on_right_side(const coord &figure_coord)
+bool Field::is_border_on_right_side(const Figure *figure)
 {
+    const auto figure_coord = figure->get_figure_coord();
+
     for (int i = 0; i < BLOCK_COUNT; i++)
     {
         const int next_column = figure_coord.column[i] + 1;
@@ -135,8 +150,10 @@ bool Field::is_border_on_right_side(const coord &figure_coord)
     return false;
 }
 
-bool Field::is_other_figure_from_bottom(const coord &figure_coord)
+bool Field::is_other_figure_from_bottom(const Figure *figure)
 {
+    const auto figure_coord = figure->get_figure_coord();
+
     for (int active_block_index = 0; active_block_index < BLOCK_COUNT; active_block_index++)
     {
         // Check that below current block not another block.
@@ -170,6 +187,7 @@ bool Field::is_other_figure_from_bottom(const coord &figure_coord)
 
             if (!same_fugire_below)
             {
+                // At least one block from current figure bump into another block.
                 return true;
             }
         }
@@ -178,37 +196,9 @@ bool Field::is_other_figure_from_bottom(const coord &figure_coord)
     return false;
 }
 
-bool Field::is_figure(coord figure_coord)
+bool Field::is_other_figure_on_left_side(const Figure *figure)
 {
-    for (int i = 0; i < BLOCK_COUNT; i++)
-    {
-        bool is_block = FIELD[figure_coord.row[i]][figure_coord.column[i]] == BLOCK;
-        if (is_block)
-        {
-            int current_row = figure_coord.row[i];
-            int current_column = figure_coord.column[i];
-            bool same_fugire = false;
 
-            for (int j = 0; j < BLOCK_COUNT; j++)
-            {
-                if (j == i)
-                {
-                    continue;
-                }
-                bool same_row = current_row + 1 == figure_coord.row[j];
-                bool same_column = current_column == figure_coord.column[j];
-                if (same_row && same_column)
-                {
-                    same_fugire = true;
-                    break;
-                }
-            }
-            if (!same_fugire)
-            {
-                return true;
-            }
-        }
-    }
     return false;
 }
 

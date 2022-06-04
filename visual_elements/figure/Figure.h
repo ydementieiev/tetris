@@ -13,15 +13,16 @@ class Figure
 public:
     virtual void rotate() = 0;
 
-    coord get_figure_coord();
-    coord get_figure_coord_old();
+    coord get_figure_coord() const;
+    coord get_figure_coord_old() const;
 
     void move_down();
     void move_left();
     void move_right();
-    void return_to_old_coord();
 
     void save_old_coord();
+
+    bool is_block_from_same_figure();
 
 protected:
     coord figure_coord;
