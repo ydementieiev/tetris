@@ -24,6 +24,7 @@ private:
 
     bool is_other_figure_from_bottom(const Figure *figure);
     bool is_other_figure_on_left_side(const Figure *figure);
+    bool is_other_figure_on_right_side(const Figure *figure);
 
     void fill_field_by_default();
 

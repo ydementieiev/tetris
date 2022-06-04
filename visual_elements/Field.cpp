@@ -96,6 +96,11 @@ bool Field::is_possible_to_move_right(const Figure *figure)
         return false;
     }
 
+    if (is_other_figure_on_right_side(figure))
+    {
+        return false;
+    }
+
     return true;
 }
 
@@ -179,6 +184,54 @@ bool Field::is_other_figure_from_bottom(const Figure *figure)
 
 bool Field::is_other_figure_on_left_side(const Figure *figure)
 {
+    const auto figure_coord = figure->get_figure_coord();
+
+    for (int active_block_index = 0; active_block_index < BLOCK_COUNT; active_block_index++)
+    {
+        // Check that below current block not another block.
+        const int row_active_block = figure_coord.row[active_block_index];
+        const int left_column_to_active_block = figure_coord.column[active_block_index] - 1;
+        const bool is_other_block_below = FIELD[row_active_block][left_column_to_active_block] == BLOCK;
+
+        if (is_other_block_below)
+        {
+            // Check that block below not from current figure.
+            const auto block_from_same_figure = figure->is_block_from_same_figure(row_active_block, left_column_to_active_block);
+
+            if (!block_from_same_figure)
+            {
+                // At least one block from current figure bump into another block.
+                return true;
+            }
+        }
+    }
+
+    return false;
+}
+
+bool Field::is_other_figure_on_right_side(const Figure *figure)
+{
+    const auto figure_coord = figure->get_figure_coord();
+
+    for (int active_block_index = 0; active_block_index < BLOCK_COUNT; active_block_index++)
+    {
+        // Check that below current block not another block.
+        const int row_active_block = figure_coord.row[active_block_index];
+        const int right_column_to_active_block = figure_coord.column[active_block_index] + 1;
+        const bool is_other_block_below = FIELD[row_active_block][right_column_to_active_block] == BLOCK;
+
+        if (is_other_block_below)
+        {
+            // Check that block below not from current figure.
+            const auto block_from_same_figure = figure->is_block_from_same_figure(row_active_block, right_column_to_active_block);
+
+            if (!block_from_same_figure)
+            {
+                // At least one block from current figure bump into another block.
+                return true;
+            }
+        }
+    }
 
     return false;
 }
