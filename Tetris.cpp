@@ -30,16 +30,16 @@ void Tetris::run()
         // need_to_clear = false;
         // }
 
-        // if (field_.is_suitable_to_move(active_figure_->get_figure_coord())) {
-        active_figure_->move_down();
-        field_.clear_old_figure_coord(active_figure_->get_figure_coord_old());
-        field_.update_new_figure_coord(active_figure_->get_figure_coord());
-        // } else {
-        // if ( active_figure_ ) {
-        // delete active_figure_;
-        // active_figure_ = new Stick;
-        // }
-        // }
+        if (field_.is_possible_to_move_down(active_figure_->get_figure_coord())) {
+            active_figure_->move_down();
+            field_.clear_old_figure_coord(active_figure_->get_figure_coord_old());
+            field_.update_new_figure_coord(active_figure_->get_figure_coord());
+        } else {
+            if ( active_figure_ ) {
+                delete active_figure_;
+                active_figure_ = new Stick;
+            }
+        }
     }
 }
 
@@ -78,16 +78,20 @@ void Tetris::sleep_or_proccess_user_action()
         switch (user_input)
         {
         case eActions::LEFT:
-            active_figure_->move_left();
-            field_.clear_old_figure_coord(active_figure_->get_figure_coord_old());
-            field_.update_new_figure_coord(active_figure_->get_figure_coord());
-            field_.draw_field();
+            if(field_.is_possible_to_move_left(active_figure_->get_figure_coord())) {
+                active_figure_->move_left();
+                field_.clear_old_figure_coord(active_figure_->get_figure_coord_old());
+                field_.update_new_figure_coord(active_figure_->get_figure_coord());
+                field_.draw_field();
+            }
             break;
         case eActions::RIGHT:
-            active_figure_->move_right();
-            field_.clear_old_figure_coord(active_figure_->get_figure_coord_old());
-            field_.update_new_figure_coord(active_figure_->get_figure_coord());
-            field_.draw_field();
+            if(field_.is_possible_to_move_right(active_figure_->get_figure_coord())) {
+                active_figure_->move_right();
+                field_.clear_old_figure_coord(active_figure_->get_figure_coord_old());
+                field_.update_new_figure_coord(active_figure_->get_figure_coord());
+                field_.draw_field();
+            }
             break;
         case eActions::UP:
             active_figure_->rotate();

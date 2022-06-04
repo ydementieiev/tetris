@@ -13,11 +13,11 @@ Field::Field()
 
 void Field::fill_field_by_default()
 {
-    for (int row = 0; row < ROW; row++)
+    for (int row = 0; row < ROWS; row++)
     {
         for (int column = 0; column < COLUMNS; column++)
         {
-            if (row == 0 || row == ROW - 1)
+            if (row == 0 || row == ROWS - 1)
             {
                 FIELD[row][column] = BORDER;
             }
@@ -33,7 +33,7 @@ void Field::fill_field_by_default()
     }
 }
 
-void Field::update_new_figure_coord(coord figure_coord)
+void Field::update_new_figure_coord(const coord &figure_coord)
 {
     for (int i = 0; i < BLOCK_COUNT; i++)
     {
@@ -44,7 +44,7 @@ void Field::update_new_figure_coord(coord figure_coord)
     }
 }
 
-void Field::clear_old_figure_coord(coord figure_coord)
+void Field::clear_old_figure_coord(const coord &figure_coord)
 {
     for (int i = 0; i < BLOCK_COUNT; i++)
     {
@@ -55,29 +55,39 @@ void Field::clear_old_figure_coord(coord figure_coord)
     }
 }
 
-bool Field::is_suitable_to_move(coord figure_coord)
+bool Field::is_possible_to_move_down(const coord &figure_coord)
 {
-    for (int i = 0; i < BLOCK_COUNT; i++)
-    {
-        if (is_border_bottom(figure_coord.row[i], figure_coord.column[i]))
-        {
-            return false;
-        }
-        if (is_figure(figure_coord))
-        {
-            return false;
-        }
+    if (is_border_from_bottom(figure_coord)) {
+        return false;
     }
 
     return true;
 }
 
-bool Field::is_border_left_right(coord figure_coord)
+bool Field::is_possible_to_move_left(const coord &figure_coord)
+{
+    if (is_border_on_left_side(figure_coord)) {
+        return false;
+    }
+
+    return true;
+}
+
+bool Field::is_possible_to_move_right(const coord &figure_coord)
+{
+    if (is_border_on_right_side(figure_coord)) {
+        return false;
+    }
+
+    return true;
+}
+
+bool Field::is_border_from_bottom(const coord &figure_coord)
 {
     for (int i = 0; i < BLOCK_COUNT; i++)
     {
-        auto column = figure_coord.column[i];
-        const bool is_border = column == 0 || column == COLUMNS - 1;
+        const int next_row = figure_coord.row[i] + 1;
+        const bool is_border = next_row == ROWS - 1;
         if (is_border)
         {
             return true;
@@ -87,11 +97,34 @@ bool Field::is_border_left_right(coord figure_coord)
     return false;
 }
 
-bool Field::is_border_bottom(int row, int column)
+bool Field::is_border_on_left_side(const coord &figure_coord)
 {
-    const bool row_is_suitable = row < ROW - 1; // Do not check top row, figure need appear.
+    for (int i = 0; i < BLOCK_COUNT; i++)
+    {
+        const int prev_column = figure_coord.column[i] - 1;
+        const bool is_border = prev_column == 0;
+        if (is_border)
+        {
+            return true;
+        }
+    }
 
-    return !row_is_suitable;
+    return false;
+}
+
+bool Field::is_border_on_right_side(const coord &figure_coord)
+{
+    for (int i = 0; i < BLOCK_COUNT; i++)
+    {
+        const int next_column = figure_coord.column[i] + 1;
+        const bool is_border = next_column == COLUMNS - 1;
+        if (is_border)
+        {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 bool Field::is_figure(coord figure_coord)
@@ -132,7 +165,7 @@ void Field::draw_field()
 {
     system("clear");
 
-    for (int row = 0; row < ROW; row++)
+    for (int row = 0; row < ROWS; row++)
     {
         for (int column = 0; column < COLUMNS; column++)
         {
