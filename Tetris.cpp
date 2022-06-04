@@ -19,21 +19,12 @@ void Tetris::run()
 
     while (true)
     {
-        field_.draw_field();
-        sleep_or_proccess_user_action();
-
-        // auto new_figure_coord =  active_figure_->get_figure_coord();
-        // bool need_to_clear = true;
-
-        // if( field_.is_border_left_right(new_figure_coord)) {
-        // active_figure_->return_to_old_coord();
-        // need_to_clear = false;
-        // }
-
         if (field_.is_possible_to_move_down(active_figure_->get_figure_coord())) {
             active_figure_->move_down();
             field_.clear_old_figure_coord(active_figure_->get_figure_coord_old());
             field_.update_new_figure_coord(active_figure_->get_figure_coord());
+            field_.draw_field();
+            sleep_or_proccess_user_action();
         } else {
             if ( active_figure_ ) {
                 delete active_figure_;
