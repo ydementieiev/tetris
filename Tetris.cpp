@@ -15,24 +15,22 @@ Tetris::Tetris()
 
 void Tetris::run()
 {
-    active_figure_ = new Stick;
+    Figure *active_figure = new Stick;
 
     while (true)
     {
-        if (field_.is_possible_to_move_down(active_figure_))
+        if (field_.is_possible_to_move_down(active_figure))
         {
-            active_figure_->move_down();
-            field_.clear_old_figure_coord(active_figure_);
-            field_.update_new_figure_coord(active_figure_);
-            field_.draw_field();
-            sleep_or_proccess_user_action();
+            active_figure->move_down();
+            update_figure_on_field(active_figure);
+            sleep_and_proccess_user_action(active_figure);
         }
         else
         {
-            if (active_figure_)
+            if (active_figure)
             {
-                delete active_figure_;
-                active_figure_ = new Stick;
+                delete active_figure;
+                active_figure = new Stick;
             }
         }
     }
@@ -63,7 +61,14 @@ eActions Tetris::read_user_input()
     return eActions::NO_ACTION;
 }
 
-void Tetris::sleep_or_proccess_user_action()
+void Tetris::update_figure_on_field(Figure *figure)
+{
+    field_.clear_old_figure_coord(figure);
+    field_.update_new_figure_coord(figure);
+    field_.draw_field();
+}
+
+void Tetris::sleep_and_proccess_user_action(Figure *active_figure)
 {
     clock_t end_time = clock() + DELAY;
 
@@ -73,28 +78,22 @@ void Tetris::sleep_or_proccess_user_action()
         switch (user_input)
         {
         case eActions::LEFT:
-            if (field_.is_possible_to_move_left(active_figure_))
+            if (field_.is_possible_to_move_left(active_figure))
             {
-                active_figure_->move_left();
-                field_.clear_old_figure_coord(active_figure_);
-                field_.update_new_figure_coord(active_figure_);
-                field_.draw_field();
+                active_figure->move_left();
+                update_figure_on_field(active_figure);
             }
             break;
         case eActions::RIGHT:
-            if (field_.is_possible_to_move_right(active_figure_))
+            if (field_.is_possible_to_move_right(active_figure))
             {
-                active_figure_->move_right();
-                field_.clear_old_figure_coord(active_figure_);
-                field_.update_new_figure_coord(active_figure_);
-                field_.draw_field();
+                active_figure->move_right();
+                update_figure_on_field(active_figure);
             }
             break;
         case eActions::UP:
-            active_figure_->rotate();
-            field_.clear_old_figure_coord(active_figure_);
-            field_.update_new_figure_coord(active_figure_);
-            field_.draw_field();
+            active_figure->rotate();
+            update_figure_on_field(active_figure);
             break;
         default:
             break;

@@ -18,10 +18,10 @@ public:
     void run();
 
 private:
-    void sleep_or_proccess_user_action();
+    void update_figure_on_field(Figure *figure);
+    void sleep_and_proccess_user_action(Figure *active_figure);
     eActions read_user_input();
 
 private:
     Field field_;
-    Figure *active_figure_;
 };
