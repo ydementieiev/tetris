@@ -161,31 +161,12 @@ bool Field::is_other_figure_from_bottom(const Figure *figure)
         const int column_active_block = figure_coord.column[active_block_index];
         const bool is_other_block_below = FIELD[next_row_to_active_block][column_active_block] == BLOCK;
 
-        bool same_fugire_below = false;
-
         if (is_other_block_below)
         {
             // Check that block below not from current figure.
-            for (int other_block_index = 0; other_block_index < BLOCK_COUNT; other_block_index++)
-            {
-                if (other_block_index == active_block_index)
-                {
-                    // Skip comparing the same block.
-                    continue;
-                }
-                const int other_block_row = figure_coord.row[other_block_index];
-                const int other_block_column = figure_coord.column[other_block_index];
+            const auto block_from_same_figure = figure->is_block_from_same_figure(next_row_to_active_block, column_active_block);
 
-                const bool same_row = next_row_to_active_block == other_block_row;
-                const bool same_column = column_active_block == other_block_column;
-                if (same_row && same_column)
-                {
-                    same_fugire_below = true;
-                    break;
-                }
-            }
-
-            if (!same_fugire_below)
+            if (!block_from_same_figure)
             {
                 // At least one block from current figure bump into another block.
                 return true;

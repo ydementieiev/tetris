@@ -49,27 +49,21 @@ void Figure::save_old_coord()
     }
 }
 
-bool Figure::is_block_from_same_figure()
+bool Figure::is_block_from_same_figure(int row_to_check, int column_to_check) const
 {
     // Check that block below not from current figure.
-    // for (int other_block_index = 0; other_block_index < BLOCK_COUNT; other_block_index++)
-    // {
-    //     if (other_block_index == active_block_index)
-    //     {
-    //         // Skip comparing the same block.
-    //         continue;
-    //     }
-    //     const int other_block_row = figure_coord.row[other_block_index];
-    //     const int other_block_column = figure_coord.column[other_block_index];
+    for (int other_block_index = 0; other_block_index < BLOCK_COUNT; other_block_index++)
+    {
+        const int other_block_row = figure_coord.row[other_block_index];
+        const int other_block_column = figure_coord.column[other_block_index];
 
-    //     const bool same_row = next_row_to_active_block == other_block_row;
-    //     const bool same_column = column_active_block == other_block_column;
-    //     if (same_row && same_column)
-    //     {
-    //         same_fugire_below = true;
-    //         break;
-    //     }
-    // }
+        const bool same_row = row_to_check == other_block_row;
+        const bool same_column = column_to_check == other_block_column;
+        if (same_row && same_column)
+        {
+            return true;
+        }
+    }
 
     return false;
 }
