@@ -1,7 +1,6 @@
 #include "Stick.h"
 
-
-Stick::Stick() 
+Stick::Stick()
 {
     figure_coord.row[0] = -2;
     figure_coord.column[0] = 12;
@@ -18,5 +17,4 @@ Stick::Stick()
 
 void Stick::rotate()
 {
-
 }

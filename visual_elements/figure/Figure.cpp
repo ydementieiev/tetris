@@ -14,28 +14,36 @@ void Figure::move_down()
 {
     save_old_coord();
 
-    for(int i = 0; i < BLOCK_COUNT; i++){
+    for (int i = 0; i < BLOCK_COUNT; i++)
+    {
         figure_coord.row[i]++;
     }
 }
 
 void Figure::move_left()
 {
-    for(int i = 0; i < BLOCK_COUNT; i++){
+    save_old_coord();
+
+    for (int i = 0; i < BLOCK_COUNT; i++)
+    {
         figure_coord.column[i]--;
     }
 }
 
 void Figure::move_right()
 {
-    for(int i = 0; i < BLOCK_COUNT; i++){
+    save_old_coord();
+
+    for (int i = 0; i < BLOCK_COUNT; i++)
+    {
         figure_coord.column[i]++;
     }
 }
 
 void Figure::return_to_old_coord()
 {
-    for(int i = 0; i < BLOCK_COUNT; i++){
+    for (int i = 0; i < BLOCK_COUNT; i++)
+    {
         figure_coord.row[i] = figure_coord_old.row[i];
         figure_coord.column[i] = figure_coord_old.column[i];
     }
@@ -43,7 +51,8 @@ void Figure::return_to_old_coord()
 
 void Figure::save_old_coord()
 {
-    for(int i = 0; i < BLOCK_COUNT; i++){
+    for (int i = 0; i < BLOCK_COUNT; i++)
+    {
         figure_coord_old.row[i] = figure_coord.row[i];
         figure_coord_old.column[i] = figure_coord.column[i];
     }

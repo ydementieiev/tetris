@@ -4,7 +4,7 @@
 
 class Stick : public Figure
 {
-    public:
-        Stick();
-        void rotate() override;
+public:
+    Stick();
+    void rotate() override;
 };
