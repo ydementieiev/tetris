@@ -30,6 +30,8 @@ void Tetris::run()
             figure->move_left();
         } else if (user_input == eActions::RIGHT) {
             figure->move_right();
+        } else if ( user_input == eActions::UP) {
+            figure->rotate();
         }
 
         auto new_figure_coord =  figure->get_figure_coord();
@@ -61,6 +63,8 @@ eActions Tetris::read_user_input()
             return eActions::LEFT;
         } else if (ch == 'd') {
             return eActions::RIGHT;
+        } else if (ch == 'w') {
+            return eActions::UP;
         }
          else if (ch == '0') {
             std::cout << "Press 0 to exit, or any other to continue" << std::endl;

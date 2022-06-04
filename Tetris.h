@@ -3,7 +3,8 @@
 enum class eActions {
     NO_ACTION = 0,
     LEFT = 1,
-    RIGHT = 2
+    RIGHT = 2,
+    UP = 2
 };
 
 class Tetris
