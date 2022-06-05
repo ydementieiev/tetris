@@ -51,6 +51,8 @@ eActions Tetris::read_user_input()
             return eActions::RIGHT;
         case 'w':
             return eActions::UP;
+        case 's':
+            return eActions::DOWN;
         case '0':
             // Use '0' for exit from game.
             exit(0);
@@ -96,6 +98,10 @@ void Tetris::sleep_and_proccess_user_action(Figure *active_figure)
         case eActions::UP:
             active_figure->rotate();
             update_figure_on_field(active_figure);
+            break;
+        case eActions::DOWN:
+                // finish sleep to speed up moving down
+                return;
             break;
         default:
             break;
