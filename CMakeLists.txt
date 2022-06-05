@@ -24,6 +24,6 @@ set(DIRS
     visual_elements/figure/concrete_figure)
 
 # Add executable target.
-add_executable(${PROJECT_NAME} ${SOURCE_FILES})
+add_executable(${PROJECT_NAME} ${SOURCE_FILES} ${HEADER_FILES})
 
 target_include_directories(${PROJECT_NAME} PRIVATE ${DIRS})

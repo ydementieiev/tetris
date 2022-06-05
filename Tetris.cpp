@@ -1,13 +1,12 @@
 #include "Tetris.h"
 #include <conio.h>
-#include <windows.h>
 #include <iostream>
 #include <time.h>
 #include "Field.h"
 #include "Figure.h"
 #include "Stick.h"
 
-const int DELAY = 500;
+const int DELAY = 1000000;
 
 Tetris::Tetris()
 {
@@ -38,9 +37,9 @@ void Tetris::run()
 
 eActions Tetris::read_user_input()
 {
-    if (_kbhit())
+    if (kbhit())
     {
-        const auto ch = _getch();
+        const auto ch = getch();
         switch (ch)
         {
         case 'a':
