@@ -1,5 +1,8 @@
 #include "Field.h"
 #include <iostream>
+#ifdef _WIN32 
+#include <Windows.h>    
+#endif
 
 const char BORDER = 'X';
 const char EMPTY = '.';

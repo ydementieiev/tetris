@@ -5,6 +5,9 @@
 #include "Field.h"
 #include "Figure.h"
 #include "Stick.h"
+#ifdef _WIN32 
+#include <Windows.h>    
+#endif
 
 const int DELAY = 1000000;
 
