@@ -6,6 +6,7 @@
 #include "Figure.h"
 #include "Stick.h"
 #include "Square.h"
+#include <ctime>
 #ifdef _WIN32 
 #include <Windows.h>    
 #endif
@@ -18,8 +19,7 @@ Tetris::Tetris()
 
 void Tetris::run()
 {
-    Figure *active_figure = new Square;
-
+    Figure *active_figure = get_random_figure();
     while (true)
     {
         if (field_.is_possible_to_move_down(active_figure))
@@ -33,7 +33,7 @@ void Tetris::run()
             if (active_figure)
             {
                 delete active_figure;
-                active_figure = new Square;
+                active_figure = get_random_figure();
             }
         }
     }
@@ -111,4 +111,20 @@ void Tetris::sleep_and_proccess_user_action(Figure *active_figure)
             break;
         }
     }
+}
+
+Figure * Tetris::get_random_figure()
+{
+    srand(time(0));
+    int random_figure = 1 + rand() % 2;
+    Figure *active_figure = nullptr;
+    if (random_figure == 1)
+    {
+        active_figure = new Stick;
+    }
+    else if (random_figure == 2)
+    {
+        active_figure = new Square;
+    }
+    return active_figure;
 }

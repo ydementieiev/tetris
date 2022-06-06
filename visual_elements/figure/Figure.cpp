@@ -1,5 +1,6 @@
 #include "Figure.h"
 
+
 coord Figure::get_figure_coord() const
 {
     return figure_coord;
@@ -67,3 +68,4 @@ bool Figure::is_block_from_same_figure(int row_to_check, int column_to_check) co
 
     return false;
 }
+

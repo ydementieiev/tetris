@@ -15,5 +15,5 @@ Square::Square()
 }
 void Square::rotate()
 {
-    
+    //
 }

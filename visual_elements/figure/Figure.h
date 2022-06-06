@@ -23,7 +23,7 @@ public:
     void save_old_coord();
 
     bool is_block_from_same_figure(int row_to_check, int column_to_check) const;
-
+    
 protected:
     coord figure_coord;
     coord figure_coord_old;

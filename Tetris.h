@@ -22,6 +22,7 @@ private:
     void update_figure_on_field(Figure *figure);
     void sleep_and_proccess_user_action(Figure *active_figure);
     eActions read_user_input();
+    Figure * get_random_figure();
 
 private:
     Field field_;
