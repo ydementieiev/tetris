@@ -6,6 +6,7 @@
 #include "Figure.h"
 #include "Stick.h"
 #include "Square.h"
+#include "HookRight.h"
 #include <ctime>
 #ifdef _WIN32 
 #include <Windows.h>    
@@ -116,15 +117,22 @@ void Tetris::sleep_and_proccess_user_action(Figure *active_figure)
 Figure * Tetris::get_random_figure()
 {
     srand(time(0));
-    int random_figure = 1 + rand() % 2;
+    int random_figure = 1 + rand() % 3;
     Figure *active_figure = nullptr;
-    if (random_figure == 1)
+    switch (random_figure)
     {
+    case 1:
         active_figure = new Stick;
-    }
-    else if (random_figure == 2)
-    {
+        break;
+    case 2:
         active_figure = new Square;
+        break;
+    case 3:
+        active_figure = new Hook_Right;
+        break;
+    default:
+        break;
     }
+
     return active_figure;
 }
