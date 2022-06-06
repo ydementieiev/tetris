@@ -5,17 +5,19 @@ set(CMAKE_CXX_STANDARD 11)            # Enable c++14 standard
 # Add sources files.
 set(SOURCE_FILES
     main.cpp
-    Tetris.cpp 
+    Tetris.cpp
     visual_elements/Field.cpp
     visual_elements/figure/Figure.cpp
-    visual_elements/figure/concrete_figure/Stick.cpp)
+    visual_elements/figure/concrete_figure/Stick.cpp
+    visual_elements/figure/concrete_figure/Square.cpp)
 
 # Add headers files.
 set(HEADER_FILES
     Tetris.h
     visual_elements/Field.h
     visual_elements/figure/Figure.h
-    visual_elements/figure/concrete_figure/Stick.h)
+    visual_elements/figure/concrete_figure/Stick.h
+    visual_elements/figure/concrete_figure/Square.h)
 
 # Add subdirectory.
 set(DIRS

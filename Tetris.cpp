@@ -5,6 +5,7 @@
 #include "Field.h"
 #include "Figure.h"
 #include "Stick.h"
+#include "Square.h"
 #ifdef _WIN32 
 #include <Windows.h>    
 #endif
@@ -17,7 +18,7 @@ Tetris::Tetris()
 
 void Tetris::run()
 {
-    Figure *active_figure = new Stick;
+    Figure *active_figure = new Square;
 
     while (true)
     {
@@ -32,7 +33,7 @@ void Tetris::run()
             if (active_figure)
             {
                 delete active_figure;
-                active_figure = new Stick;
+                active_figure = new Square;
             }
         }
     }
