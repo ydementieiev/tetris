@@ -19,6 +19,9 @@ public:
     bool is_possible_to_rotate(Figure *figure);
 
 private:
+    bool is_possible_to_rotate_on_figure(Figure *figure);
+    bool is_possible_to_rotate_on_border(Figure *figure);
+
     bool is_border_from_bottom(const Figure *figure);
     bool is_border_on_left_side(const Figure *figure);
     bool is_border_on_right_side(const Figure *figure);

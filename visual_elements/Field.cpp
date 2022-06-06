@@ -108,34 +108,17 @@ bool Field::is_possible_to_move_right(const Figure *figure)
 
 bool Field::is_possible_to_rotate(Figure *figure)
 {
-    bool result = true;
-    figure->rotate();
-    auto active_coord = figure->get_figure_coord();
-    for (int i = 0; i < BLOCK_COUNT; i++)
+    if (is_possible_to_rotate_on_figure(figure))
     {
-        bool is_wrong = FIELD[active_coord.row[i]][active_coord.column[i]] == BLOCK;
-        if (is_wrong)
-        {
-            auto active_cord_old = figure->get_figure_coord_old();
-            if (active_cord_old.row[i] == active_coord.row[i] && active_cord_old.column[i] == active_coord.column[i])
-            {
-                continue;
-            }
-            result = false;
-            break;
-        }
+        return false;
     }
-    for (int i = 0; i < BLOCK_COUNT; i++)
+    if (is_possible_to_rotate_on_border(figure))
     {
-        bool is_wrong = FIELD[active_coord.row[i]][active_coord.column[i]] == BORDER;
-        if (is_wrong)
-        {
-            result = false;
-            break;
-        }
+        return false;
     }
-    figure->rotate();
-    return result;
+    
+    return true;
+    
 }
 
 bool Field::is_border_from_bottom(const Figure *figure)
@@ -282,4 +265,46 @@ void Field::draw_field()
         }
         std::cout << std::endl;
     }
+}
+
+
+bool Field::is_possible_to_rotate_on_figure(Figure *figure)
+{
+    bool result = false;
+    figure->rotate();
+    auto active_coord = figure->get_figure_coord();
+    for (int i = 0; i < BLOCK_COUNT; i++)
+    {
+        bool is_wrong = FIELD[active_coord.row[i]][active_coord.column[i]] == BLOCK;
+        if (is_wrong)
+        {
+            auto active_cord_old = figure->get_figure_coord_old();
+            if (active_cord_old.row[i] == active_coord.row[i] && active_cord_old.column[i] == active_coord.column[i])
+            {
+                continue;
+            }
+            result = true;
+            break;
+        }
+    }
+    figure->rotate();
+    return result;
+}
+
+bool Field::is_possible_to_rotate_on_border(Figure *figure)
+{
+    bool result = false;
+    figure->rotate();
+    auto active_coord = figure->get_figure_coord();
+    for (int i = 0; i < BLOCK_COUNT; i++)
+    {
+        bool is_wrong = FIELD[active_coord.row[i]][active_coord.column[i]] == BORDER;
+        if (is_wrong)
+        {
+            result = true;
+            break;
+        }
+    }
+    figure->rotate();
+    return result;
 }
