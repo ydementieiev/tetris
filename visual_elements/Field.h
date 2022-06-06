@@ -16,6 +16,7 @@ public:
     bool is_possible_to_move_down(const Figure *figure);
     bool is_possible_to_move_left(const Figure *figure);
     bool is_possible_to_move_right(const Figure *figure);
+    bool is_possible_to_rotate(Figure *figure);
 
 private:
     bool is_border_from_bottom(const Figure *figure);

@@ -96,8 +96,11 @@ void Tetris::sleep_and_proccess_user_action(Figure *active_figure)
             }
             break;
         case eActions::UP:
-            active_figure->rotate();
-            update_figure_on_field(active_figure);
+            if (field_.is_possible_to_rotate(active_figure))
+            {
+                active_figure->rotate();
+                update_figure_on_field(active_figure);
+            }
             break;
         case eActions::DOWN:
                 // finish sleep to speed up moving down

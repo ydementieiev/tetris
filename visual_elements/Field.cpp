@@ -106,6 +106,37 @@ bool Field::is_possible_to_move_right(const Figure *figure)
     return true;
 }
 
+bool Field::is_possible_to_rotate(Figure *figure)
+{
+    bool result = true;
+    figure->rotate();
+    auto active_coord = figure->get_figure_coord();
+    for (int i = 0; i < BLOCK_COUNT; i++)
+    {
+        bool is_wrong = FIELD[active_coord.row[i]][active_coord.column[i]] == BLOCK;
+        if (FIELD[active_coord.row[i]][active_coord.column[i]] == BLOCK)
+        {
+            continue;
+        }
+        if (is_wrong)
+        {
+            result = false;
+            break;
+        }
+    }
+    for (int i = 0; i < BLOCK_COUNT; i++)
+    {
+        bool is_wrong = FIELD[active_coord.row[i]][active_coord.column[i]] == BORDER;
+        if (is_wrong)
+        {
+            result = false;
+            break;
+        }
+    }
+    figure->rotate();
+    return result;
+}
+
 bool Field::is_border_from_bottom(const Figure *figure)
 {
     const auto figure_coord = figure->get_figure_coord();
