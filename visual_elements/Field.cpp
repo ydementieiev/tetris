@@ -114,12 +114,13 @@ bool Field::is_possible_to_rotate(Figure *figure)
     for (int i = 0; i < BLOCK_COUNT; i++)
     {
         bool is_wrong = FIELD[active_coord.row[i]][active_coord.column[i]] == BLOCK;
-        if (FIELD[active_coord.row[i]][active_coord.column[i]] == BLOCK)
-        {
-            continue;
-        }
         if (is_wrong)
         {
+            auto active_cord_old = figure->get_figure_coord_old();
+            if (active_cord_old.row[i] == active_coord.row[i] && active_cord_old.column[i] == active_coord.column[i])
+            {
+                continue;
+            }
             result = false;
             break;
         }
