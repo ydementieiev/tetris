@@ -6,5 +6,5 @@ class Square : public Figure
 {
 public:
     Square();
-    void rotate() override;
+    void rotate(bool rotate_back = false) override;
 };

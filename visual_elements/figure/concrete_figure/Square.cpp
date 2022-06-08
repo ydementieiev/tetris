@@ -13,7 +13,7 @@ Square::Square()
     figure_coord.row[3] = 1;
     figure_coord.column[3] = 12;
 }
-void Square::rotate()
+void Square::rotate(bool rotate_back)
 {
     // nothing to rotate
 }

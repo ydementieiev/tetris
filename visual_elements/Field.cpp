@@ -287,7 +287,7 @@ bool Field::is_possible_to_rotate_on_figure(Figure *figure)
             break;
         }
     }
-    figure->rotate();
+    figure->rotate(true);
     return result;
 }
 
@@ -305,6 +305,6 @@ bool Field::is_possible_to_rotate_on_border(Figure *figure)
             break;
         }
     }
-    figure->rotate();
+    figure->rotate(true);
     return result;
 }

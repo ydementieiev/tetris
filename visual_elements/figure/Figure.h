@@ -11,7 +11,7 @@ struct coord
 class Figure
 {
 public:
-    virtual void rotate() = 0;
+    virtual void rotate(bool rotate_back = false) = 0;
 
     coord get_figure_coord() const;
     coord get_figure_coord_old() const;

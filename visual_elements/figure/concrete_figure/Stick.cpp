@@ -15,7 +15,7 @@ Stick::Stick()
     figure_coord.column[3] = 12;
 }
 
-void Stick::rotate()
+void Stick::rotate(bool rotate_back)
 {
     save_old_coord();
 

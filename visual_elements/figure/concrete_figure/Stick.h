@@ -12,7 +12,7 @@ private:
     };
 public:
     Stick();
-    void rotate() override;
+    void rotate(bool rotate_back = false) override;
     void rotate_stick_to_horizontal();
     void rotate_stick_to_vertical();
 private:
