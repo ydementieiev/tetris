@@ -18,7 +18,8 @@ public:
     void rotate_hook_to_right_side();
     void rotate_hook_to_left_side();
     void rotate_hook_to_down();
+    void rotate_to_original_new();
 private:
-    position current_position_ = position::original;
+    position current_position_HR = position::original;
 };
 

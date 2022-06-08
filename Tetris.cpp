@@ -7,7 +7,6 @@
 #include "Stick.h"
 #include "Square.h"
 #include "HookRight.h"
-#include <ctime>
 #ifdef _WIN32 
 #include <Windows.h>    
 #endif
@@ -117,7 +116,7 @@ void Tetris::sleep_and_proccess_user_action(Figure *active_figure)
 Figure * Tetris::get_random_figure()
 {
     srand(time(0));
-    int random_figure = 1 + rand() % 3;
+    int random_figure = 3;
     Figure *active_figure = nullptr;
     switch (random_figure)
     {
