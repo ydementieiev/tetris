@@ -75,8 +75,8 @@ void Hook_Right::rotate_hook_to_down()
     int row = figure_coord.row[1];
     int column = figure_coord.column[1];
 
-    figure_coord.row[0] = row + 1; //
-    figure_coord.column[0] = column; //
+    figure_coord.row[0] = row + 1; 
+    figure_coord.column[0] = column; 
 
     figure_coord.row[2] = row + 1;
     figure_coord.column[2] = column -1;
@@ -95,8 +95,8 @@ void Hook_Right::rotate_hook_to_left_side()
     figure_coord.row[0] = row;
     figure_coord.column[0] = column + 1;
 
-    figure_coord.row[2] = row; // 
-    figure_coord.column[2] = column - 1; //
+    figure_coord.row[2] = row; 
+    figure_coord.column[2] = column - 1; 
 
     figure_coord.row[3] = row - 1;
     figure_coord.column[3] = column - 1;
@@ -110,8 +110,8 @@ void Hook_Right::rotate_to_original_new()
     int row = figure_coord.row[1];
     int column = figure_coord.column[1];
 
-    figure_coord.row[0] = row; //
-    figure_coord.column[0] = column + 1;//
+    figure_coord.row[0] = row; 
+    figure_coord.column[0] = column + 1;
 
     figure_coord.row[2] = row + 1; 
     figure_coord.column[2] = column; 
