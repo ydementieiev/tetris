@@ -10,7 +10,8 @@ set(SOURCE_FILES
     visual_elements/figure/Figure.cpp
     visual_elements/figure/concrete_figure/Stick.cpp
     visual_elements/figure/concrete_figure/Square.cpp
-    visual_elements/figure/concrete_figure/HookRight.cpp)
+    visual_elements/figure/concrete_figure/HookRight.cpp
+    visual_elements/figure/concrete_figure/HookLeft.cpp)
 
 # Add headers files.
 set(HEADER_FILES
@@ -19,7 +20,8 @@ set(HEADER_FILES
     visual_elements/figure/Figure.h
     visual_elements/figure/concrete_figure/Stick.h
     visual_elements/figure/concrete_figure/Square.h
-    visual_elements/figure/concrete_figure/HookRight.h)
+    visual_elements/figure/concrete_figure/HookRight.h
+    visual_elements/figure/concrete_figure/HookLeft.h)
 
 # Add subdirectory.
 set(DIRS
