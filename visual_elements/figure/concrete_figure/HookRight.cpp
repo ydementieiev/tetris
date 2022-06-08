@@ -55,16 +55,13 @@ void Hook_Right::rotate_hook_to_right_side()
 {
     // 001
     //   0
-    int row = figure_coord.row[1];
-    int column = figure_coord.column[1];
+    int row = figure_coord.row[2];
+    int column = figure_coord.column[2];
 
-    figure_coord.row[0] = row + 1;
-    figure_coord.column[0] = column;
+    figure_coord.row[0] = row - 1;
+    figure_coord.column[0] = column - 1;
 
-    figure_coord.row[2] = row;
-    figure_coord.column[2] = column - 1;
-
-    figure_coord.row[3] = row;
+    figure_coord.row[3] = row - 1;
     figure_coord.column[3] = column - 2;
 }
 
@@ -73,34 +70,28 @@ void Hook_Right::rotate_hook_to_down()
     //  0
     //  1
     // 00
-    int row = figure_coord.row[1];
-    int column = figure_coord.column[1];
+    int row = figure_coord.row[2];
+    int column = figure_coord.column[2];
 
-    figure_coord.row[0] = row + 1; 
+    figure_coord.row[0] = row - 2; 
     figure_coord.column[0] = column; 
 
-    figure_coord.row[2] = row + 1;
-    figure_coord.column[2] = column -1;
-
-    figure_coord.row[3] = row - 1;
-    figure_coord.column[3] = column;
+    figure_coord.row[3] = row;
+    figure_coord.column[3] = column - 1;
 }
 
 void Hook_Right::rotate_hook_to_left_side()
 {
     // 0 
     // 010
-    int row = figure_coord.row[1];
-    int column = figure_coord.column[1];
+    int row = figure_coord.row[2];
+    int column = figure_coord.column[2];
 
     figure_coord.row[0] = row;
     figure_coord.column[0] = column + 1;
 
-    figure_coord.row[2] = row; 
-    figure_coord.column[2] = column - 1; 
-
-    figure_coord.row[3] = row - 1;
-    figure_coord.column[3] = column - 1;
+    figure_coord.row[3] = row;
+    figure_coord.column[3] = column + 2;
 }
 
 void Hook_Right::rotate_to_original_new()
@@ -108,15 +99,12 @@ void Hook_Right::rotate_to_original_new()
     // 10
     // 0
     // 0
-    int row = figure_coord.row[1];
-    int column = figure_coord.column[1];
+    int row = figure_coord.row[2];
+    int column = figure_coord.column[2];
 
-    figure_coord.row[0] = row; 
+    figure_coord.row[0] = row - 1; 
     figure_coord.column[0] = column + 1;
 
-    figure_coord.row[2] = row + 1; 
-    figure_coord.column[2] = column; 
-
-    figure_coord.row[3] = row + 2;
+    figure_coord.row[3] = row + 1;
     figure_coord.column[3] = column;
 }
