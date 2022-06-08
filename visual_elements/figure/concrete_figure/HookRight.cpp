@@ -22,6 +22,7 @@ void Hook_Right::rotate(bool rotate_back)
     {
         current_position_HR = before_prev_position_HR;
     }
+    
     switch (current_position_HR)
     {
     case position::original:
