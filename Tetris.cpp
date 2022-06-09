@@ -8,6 +8,7 @@
 #include "Square.h"
 #include "HookRight.h"
 #include "HookLeft.h"
+#include "Piramide.h"
 #ifdef _WIN32 
 #include <Windows.h>    
 #endif
@@ -117,7 +118,7 @@ void Tetris::sleep_and_proccess_user_action(Figure *active_figure)
 Figure * Tetris::get_random_figure()
 {
     srand(time(0));
-    int random_figure = 1 + rand() % 4;
+    int random_figure = 1 + rand() % 5;
     Figure *active_figure = nullptr;
     switch (random_figure)
     {
@@ -132,6 +133,9 @@ Figure * Tetris::get_random_figure()
         break;
     case 4:
         active_figure = new Hook_Left;
+        break;
+    case 5:
+        active_figure = new Piramide;
         break;
     default:
         break;

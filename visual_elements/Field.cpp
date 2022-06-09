@@ -273,18 +273,26 @@ bool Field::is_possible_to_rotate_on_figure(Figure *figure)
     bool result = false;
     figure->rotate();
     auto active_coord = figure->get_figure_coord();
+    auto active_cord_old = figure->get_figure_coord_old();
     for (int i = 0; i < BLOCK_COUNT; i++)
     {
         bool is_wrong = FIELD[active_coord.row[i]][active_coord.column[i]] == BLOCK;
         if (is_wrong)
         {
-            auto active_cord_old = figure->get_figure_coord_old();
-            if (active_cord_old.row[i] == active_coord.row[i] && active_cord_old.column[i] == active_coord.column[i])
+            bool found_same_block = false;
+            for (int j = 0; j < BLOCK_COUNT; j++)
             {
-                continue;
+                if (active_cord_old.row[j] == active_coord.row[i] && active_cord_old.column[j] == active_coord.column[i])
+                {
+                    found_same_block = true;
+                    break;
+                }
             }
-            result = true;
-            break;
+            if (!found_same_block)
+            {
+                result = true;
+                break;
+            }
         }
     }
     figure->rotate(true);
