@@ -316,3 +316,56 @@ bool Field::is_possible_to_rotate_on_border(Figure *figure)
     figure->rotate(true);
     return result;
 }
+
+
+void Field::move_all_block_on_field()
+{
+    for (int row_ = ROWS - 2; row_ > 0; row_--)
+    {
+
+        for (int column_ = 1; column_ < COLUMNS - 1; column_++)
+        {
+            if (FIELD[row_][column_] == EMPTY)
+            {
+                break;
+            }
+            if (column_ == COLUMNS - 2)
+            {
+                clear_one_line(row_);
+                move_field_down_after_clear(row_);
+                move_all_block_on_field();
+            }
+        }
+    }
+}
+
+void Field::clear_one_line(int x)
+{
+    for (int i = 1; i < COLUMNS - 1; i++)
+    {
+        FIELD[x][i] = EMPTY;
+    }
+    
+}
+
+void  Field::move_field_down_after_clear(int x)
+{
+    for (int column = 1; column < COLUMNS - 1; column++)
+    {
+        int count = 0;
+        for (int i = x - 1; i > 0; i--)
+        {
+            if (FIELD[i][column] == EMPTY)
+            {
+                break;
+            }
+            count++;
+        }
+        for (int i = x; i > x - count; i--)
+        {
+            FIELD[i][column] = BLOCK;
+            FIELD[i - 1][column] = EMPTY;
+        }
+        
+    }
+}

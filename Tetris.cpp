@@ -35,6 +35,7 @@ void Tetris::run()
             if (active_figure)
             {
                 delete active_figure;
+                field_.move_all_block_on_field();
                 active_figure = get_random_figure();
             }
         }
