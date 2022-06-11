@@ -31,6 +31,7 @@ void Tetris::run()
             active_figure->move_down();
             update_figure_on_field(active_figure);
             sleep_and_proccess_user_action(active_figure);
+            field_.show_menu();
         }
         else
         {

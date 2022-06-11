@@ -1,4 +1,5 @@
 #include "Field.h"
+#include "Menu.h"
 #include <iostream>
 #ifdef _WIN32 
 #include <Windows.h>    
@@ -7,6 +8,7 @@
 const char BORDER = 'X';
 const char EMPTY = '.';
 const char BLOCK = '0';
+const char SPACE = ' ';
 
 Field::Field()
 {
@@ -17,15 +19,19 @@ void Field::fill_field_by_default()
 {
     for (int row = 0; row < ROWS; row++)
     {
-        for (int column = 0; column < COLUMNS; column++)
+        for (int column = 0; column < COLUMNS_FULL_FIELD; column++)
         {
-            if (row == 0 || row == ROWS - 1)
+            if ((row == 0 && column <= COLUMNS - 1) || (row == ROWS - 1 && column <= COLUMNS - 1))
             {
                 FIELD[row][column] = BORDER;
             }
             else if (column == 0 || column == COLUMNS - 1)
             {
                 FIELD[row][column] = BORDER;
+            }
+            else if (column >= COLUMNS && column <= COLUMNS_FULL_FIELD)
+            {
+                FIELD[row][column] = SPACE;
             }
             else
             {
@@ -259,7 +265,7 @@ void Field::draw_field()
 
     for (int row = 0; row < ROWS; row++)
     {
-        for (int column = 0; column < COLUMNS; column++)
+        for (int column = 0; column < COLUMNS_FULL_FIELD; column++)
         {
             std::cout << FIELD[row][column];
         }
@@ -389,5 +395,14 @@ void Field::move_field_down_after_clear(int x)
         }
         
     }
+    
+}
+
+
+
+
+
+void Field::show_menu()
+{
     
 }

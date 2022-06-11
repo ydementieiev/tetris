@@ -4,11 +4,15 @@
 
 const int ROWS = 20;
 const int COLUMNS = 25;
+const int COLUMNS_FULL_FIELD = 50;
 
 class Field
 {
 public:
     Field();
+
+    void show_menu();
+
     void draw_field();
     void update_new_figure_coord(const Figure *figure);
     void clear_old_figure_coord(const Figure *figure);
@@ -36,5 +40,5 @@ private:
     void fill_field_by_default();
 
 private:
-    char FIELD[ROWS][COLUMNS];
+    char FIELD[ROWS][COLUMNS_FULL_FIELD];
 };

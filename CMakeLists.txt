@@ -14,7 +14,8 @@ set(SOURCE_FILES
     visual_elements/figure/concrete_figure/HookLeft.cpp
     visual_elements/figure/concrete_figure/Piramide.cpp
     visual_elements/figure/concrete_figure/LetterS.cpp
-    visual_elements/figure/concrete_figure/LetterS_reverse.cpp)
+    visual_elements/figure/concrete_figure/LetterS_reverse.cpp
+    visual_elements/Menu.cpp)
 
 # Add headers files.
 set(HEADER_FILES
@@ -27,7 +28,8 @@ set(HEADER_FILES
     visual_elements/figure/concrete_figure/HookLeft.h
     visual_elements/figure/concrete_figure/Piramide.h
     visual_elements/figure/concrete_figure/LetterS.h
-    visual_elements/figure/concrete_figure/LetterS_reverse.h)
+    visual_elements/figure/concrete_figure/LetterS_reverse.h
+    visual_elements/Menu.h)
 
 # Add subdirectory.
 set(DIRS
