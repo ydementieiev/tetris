@@ -9,6 +9,7 @@
 #include "HookRight.h"
 #include "HookLeft.h"
 #include "Piramide.h"
+#include "LetterS.h"
 #ifdef _WIN32 
 #include <Windows.h>    
 #endif
@@ -35,7 +36,7 @@ void Tetris::run()
             if (active_figure)
             {
                 delete active_figure;
-                field_.move_all_block_on_field();
+                // field_.clear_lines_and_move_BLOCK_down();
                 active_figure = get_random_figure();
             }
         }
@@ -119,7 +120,8 @@ void Tetris::sleep_and_proccess_user_action(Figure *active_figure)
 Figure * Tetris::get_random_figure()
 {
     srand(time(0));
-    int random_figure = 1 + rand() % 5;
+    // int random_figure = 1 + rand() % 5;
+    int random_figure = 6;
     Figure *active_figure = nullptr;
     switch (random_figure)
     {
@@ -138,6 +140,8 @@ Figure * Tetris::get_random_figure()
     case 5:
         active_figure = new Piramide;
         break;
+    case 6:
+        active_figure = new Letter_S;
     default:
         break;
     }

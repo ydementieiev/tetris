@@ -18,7 +18,7 @@ public:
     bool is_possible_to_move_right(const Figure *figure);
     bool is_possible_to_rotate(Figure *figure);
 
-    void move_all_block_on_field();
+    void clear_lines_and_move_BLOCK_down();
     void clear_one_line(int x);
     void move_field_down_after_clear(int x);
 private:

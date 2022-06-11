@@ -318,11 +318,10 @@ bool Field::is_possible_to_rotate_on_border(Figure *figure)
 }
 
 
-void Field::move_all_block_on_field()
+void Field::clear_lines_and_move_BLOCK_down()
 {
     for (int row_ = ROWS - 2; row_ > 0; row_--)
     {
-
         for (int column_ = 1; column_ < COLUMNS - 1; column_++)
         {
             if (FIELD[row_][column_] == EMPTY)
@@ -333,39 +332,62 @@ void Field::move_all_block_on_field()
             {
                 clear_one_line(row_);
                 move_field_down_after_clear(row_);
-                move_all_block_on_field();
+                clear_lines_and_move_BLOCK_down();
             }
         }
     }
 }
 
-void Field::clear_one_line(int x)
+void Field::clear_one_line(int row)
 {
     for (int i = 1; i < COLUMNS - 1; i++)
     {
-        FIELD[x][i] = EMPTY;
+        FIELD[row][i] = EMPTY;
     }
     
 }
 
-void  Field::move_field_down_after_clear(int x)
+// void  Field::move_field_down_after_clear(int row)
+// {
+//     for (int column = 1; column < COLUMNS - 1; column++)
+//     {
+//         int count = 0;
+//         for (int i = row - 1; i > 0; i--)
+//         {
+//             if (FIELD[i][column] == EMPTY)
+//             {
+//                 break;
+//             }
+//             count++;
+//         }
+//         for (int i = row; i > row - count; i--) 
+//         {
+//             FIELD[i][column] = BLOCK;
+//             FIELD[i - 1][column] = EMPTY;
+//         }
+        
+//     }
+// }
+
+void Field::move_field_down_after_clear(int x)
 {
-    for (int column = 1; column < COLUMNS - 1; column++)
+    for (int i = x - 1; i > 0; i--)
     {
         int count = 0;
-        for (int i = x - 1; i > 0; i--)
+        for (int y = 1; y < COLUMNS - 1; y++)
         {
-            if (FIELD[i][column] == EMPTY)
+            if (FIELD[x][y] == EMPTY)
             {
-                break;
+                break;;
             }
             count++;
         }
-        for (int i = x; i > x - count; i--)
+        for (int a = x; a > x - count; a--)
         {
-            FIELD[i][column] = BLOCK;
-            FIELD[i - 1][column] = EMPTY;
+            FIELD[a][i] = BLOCK;
+            FIELD[a - 1][i] = EMPTY;
         }
         
     }
+    
 }
