@@ -10,6 +10,7 @@
 #include "HookLeft.h"
 #include "Piramide.h"
 #include "LetterS.h"
+#include "LetterS_reverse.h"
 #ifdef _WIN32 
 #include <Windows.h>    
 #endif
@@ -120,8 +121,7 @@ void Tetris::sleep_and_proccess_user_action(Figure *active_figure)
 Figure * Tetris::get_random_figure()
 {
     srand(time(0));
-    // int random_figure = 1 + rand() % 5;
-    int random_figure = 6;
+    int random_figure = 1 + rand() % 7;
     Figure *active_figure = nullptr;
     switch (random_figure)
     {
@@ -142,6 +142,10 @@ Figure * Tetris::get_random_figure()
         break;
     case 6:
         active_figure = new Letter_S;
+        break;
+    case 7:
+        active_figure = new Letter_S_reverse;
+        break;
     default:
         break;
     }
