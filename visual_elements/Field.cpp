@@ -399,10 +399,18 @@ void Field::move_field_down_after_clear(int x)
 }
 
 
-
-
-
 void Field::show_menu()
 {
-    
+    Menu menu;
+    MenuLine mm[SIZE_MENU_LINE];
+    menu.getMenu(mm);
+
+    for (int count = 0; count < SIZE_MENU_LINE; count++)
+    {
+        for (int i = mm[count].y, j = 0; mm[count].line[j] != '\0'; i++, j++)
+        {
+            FIELD[mm[count].x][i] = mm[count].line[j];
+        }
+    }
+
 }

@@ -4,7 +4,8 @@
 
 const int ROWS = 20;
 const int COLUMNS = 25;
-const int COLUMNS_FULL_FIELD = 50;
+const int COLUMNS_FULL_FIELD = 70;
+
 
 class Field
 {
