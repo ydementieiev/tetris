@@ -38,7 +38,7 @@ void Tetris::run()
             if (active_figure)
             {
                 delete active_figure;
-                // field_.clear_lines_and_move_BLOCK_down();
+                field_.clear_lines_and_move_BLOCK_down();
                 active_figure = get_random_figure();
             }
         }

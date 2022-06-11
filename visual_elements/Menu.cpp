@@ -33,6 +33,7 @@ Menu::Menu()
     menu[7].line = "Game points: ";
     menu[7].x = 16;
     menu[7].y = 30;
+
 }
 
 void Menu::getMenu(MenuLine * mn)

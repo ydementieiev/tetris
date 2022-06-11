@@ -350,54 +350,30 @@ void Field::clear_one_line(int row)
     {
         FIELD[row][i] = EMPTY;
     }
-    
 }
 
-// void  Field::move_field_down_after_clear(int row)
-// {
-//     for (int column = 1; column < COLUMNS - 1; column++)
-//     {
-//         int count = 0;
-//         for (int i = row - 1; i > 0; i--)
-//         {
-//             if (FIELD[i][column] == EMPTY)
-//             {
-//                 break;
-//             }
-//             count++;
-//         }
-//         for (int i = row; i > row - count; i--) 
-//         {
-//             FIELD[i][column] = BLOCK;
-//             FIELD[i - 1][column] = EMPTY;
-//         }
-        
-//     }
-// }
-
-void Field::move_field_down_after_clear(int x)
+void  Field::move_field_down_after_clear(int row)
 {
-    for (int i = x - 1; i > 0; i--)
+    // int count = 0;
+    for (int column = 1; column < COLUMNS - 1; column++)
     {
         int count = 0;
-        for (int y = 1; y < COLUMNS - 1; y++)
+        for (int i = row - 1; i > 0; i--)
         {
-            if (FIELD[x][y] == EMPTY)
+            if (FIELD[i][column] == EMPTY)
             {
-                break;;
+                break;
             }
             count++;
         }
-        for (int a = x; a > x - count; a--)
+        for (int i = row; i > row - count; i--) 
         {
-            FIELD[a][i] = BLOCK;
-            FIELD[a - 1][i] = EMPTY;
+            FIELD[i][column] = BLOCK;
+            FIELD[i - 1][column] = EMPTY;
         }
         
     }
-    
 }
-
 
 void Field::show_menu()
 {
@@ -412,5 +388,4 @@ void Field::show_menu()
             FIELD[mm[count].x][i] = mm[count].line[j];
         }
     }
-
 }

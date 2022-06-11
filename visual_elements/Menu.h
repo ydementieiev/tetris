@@ -12,6 +12,7 @@ class Menu
 {
 private:
     MenuLine menu[SIZE_MENU_LINE];
+    int gametime = 0;
 public:
     Menu();
     void getMenu(MenuLine * mn);
