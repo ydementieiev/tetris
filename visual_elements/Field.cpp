@@ -338,7 +338,7 @@ void Field::clear_lines_and_move_BLOCK_down()
             {
                 clear_one_line(row_);
                 move_field_down_after_clear(row_);
-                clear_lines_and_move_BLOCK_down();
+                clear_lines_and_move_BLOCK_down(); // recursion
             }
         }
     }
