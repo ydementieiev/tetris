@@ -354,24 +354,20 @@ void Field::clear_one_line(int row)
 
 void  Field::move_field_down_after_clear(int row)
 {
-    // int count = 0;
     for (int column = 1; column < COLUMNS - 1; column++)
     {
-        int count = 0;
-        for (int i = row - 1; i > 0; i--)
+        for (int rows = row - 1; rows > 0; rows--)
         {
-            if (FIELD[i][column] == EMPTY)
+            if(FIELD[rows][column] == EMPTY)
             {
-                break;
+                continue;
             }
-            count++;
+            else if (FIELD[rows][column] == BLOCK)
+            {
+                FIELD[rows][column] = EMPTY;
+                FIELD[rows + 1][column] = BLOCK;
+            }
         }
-        for (int i = row; i > row - count; i--) 
-        {
-            FIELD[i][column] = BLOCK;
-            FIELD[i - 1][column] = EMPTY;
-        }
-        
     }
 }
 
