@@ -55,7 +55,7 @@ Menu::Menu()
     menu[10].x = 7;
     menu[10].y = 35;
 
-    menu[11].line = "Your gametime: " + gm_time + " second"; //
+    menu[11].line = "Your gametime: " + gm_time + " second";
     menu[11].x = 9;
     menu[11].y = 35;
 
@@ -76,8 +76,8 @@ void Menu::getMenu(MenuLine * mn)
 
 int getTime(int gametime)
 {
-    int total;
+    int int_time;
     clock_t end = clock() / CLOCKS_PER_SEC;
-    total = end;
-    return total;
+    int_time = end;
+    return int_time;
 }

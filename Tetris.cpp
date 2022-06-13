@@ -16,7 +16,6 @@
 #endif
 
 const int DELAY = 1000000;
-bool status = true;
 unsigned long gamepoints = 0;
 
 Tetris::Tetris()
@@ -28,7 +27,7 @@ void Tetris::run()
     Figure *active_figure = get_random_figure();
     while (true)
     {
-        field_.show_menu(status);
+        field_.show_menu(true);
         if (field_.is_possible_to_move_down(active_figure))
         {
             active_figure->move_down();
@@ -37,16 +36,16 @@ void Tetris::run()
         }
         else
         {
+            if (field_.check_first_row_to_the_availability_BLOCK())
+            {
+                field_.show_menu(false);
+                field_.draw_field();
+                exit(0);
+            }
             gamepoints += 10;
             if (active_figure)
             {
                 delete active_figure;
-                if (field_.check_first_row_to_the_availability_BLOCK())
-                {
-                    field_.show_menu(false);
-                    field_.draw_field();
-                    exit(0);
-                }
                 field_.clear_lines_and_move_BLOCK_down();
                 active_figure = get_random_figure();
             }
