@@ -2,8 +2,7 @@
 #include <iostream>
 #include <string>
 int gametime = 0;
-bool choice = true;
-Menu::Menu(bool choice)
+Menu::Menu()
 {
     menu[0].line = "<<< MENU >>>";
     menu[0].x = 0;
@@ -51,7 +50,6 @@ Menu::Menu(bool choice)
     menu[10].line = "GAME IS OVER, GOOD BYE!";
     menu[10].x = 9;
     menu[10].y = 35;
-
 }
 
 void Menu::getMenu(MenuLine * mn, bool st)

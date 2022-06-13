@@ -15,6 +15,8 @@ public:
     void show_menu(bool status);
     bool check_first_row_to_the_availability_BLOCK();
 
+    void clear_menu_lines();
+
     void draw_field();
     void update_new_figure_coord(const Figure *figure);
     void clear_old_figure_coord(const Figure *figure);

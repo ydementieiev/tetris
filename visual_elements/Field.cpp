@@ -389,7 +389,7 @@ bool Field::check_first_row_to_the_availability_BLOCK()
 
 void Field::show_menu(bool status)
 {
-    Menu menu(status);
+    Menu menu;
     MenuLine mm[SIZE_MENU_LINE];
     menu.getMenu(mm, status);
 
@@ -399,17 +399,32 @@ void Field::show_menu(bool status)
         {
             for (int i = mm[count].y, j = 0; mm[count].line[j] != '\0'; i++, j++)
             {
-
                 FIELD[mm[count].x][i] = mm[count].line[j];
             }
         }
     }
-    else
+    if (status == false)
     {
+        clear_menu_lines();
+        draw_field();
         for (int i = mm[10].y, j = 0; mm[10].line[j] != '\0'; i++, j++)
             {
                 FIELD[mm[10].x][i] = mm[10].line[j];
             }
+    }
+    
+}
+
+
+void Field::clear_menu_lines()
+{
+    for (int row = 0; row < ROWS - 1; row++)
+    {
+        for (int column = COLUMNS; column < COLUMNS_FULL_FIELD; column++)
+        {
+            FIELD[row][column] = SPACE;
+        }
+        
     }
     
 }

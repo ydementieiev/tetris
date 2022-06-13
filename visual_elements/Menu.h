@@ -13,7 +13,7 @@ class Menu
 private:
     MenuLine menu[SIZE_MENU_LINE];
 public:
-    Menu(bool);
+    Menu();
     void getMenu(MenuLine * mn, bool st);
     int get_gametime(int);
 };
