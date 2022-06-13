@@ -78,6 +78,6 @@ int getTime(int gametime)
 {
     int int_time;
     clock_t end = clock() / CLOCKS_PER_SEC;
-    int_time = end;
+    int_time = static_cast<int> (end);
     return int_time;
 }
