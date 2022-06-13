@@ -48,26 +48,25 @@ Menu::Menu()
     menu[9].y = 43;
 
     menu[10].line = "GAME IS OVER, GOOD BYE!";
-    menu[10].x = 9;
+    menu[10].x = 7;
     menu[10].y = 35;
+
+    menu[11].line = "Your gametime: " + s;
+    menu[11].x = 9;
+    menu[11].y = 35;
+
+    menu[12].line = "You have points " + s;
+    menu[12].x = 11;
+    menu[12].y = 35;
 }
 
-void Menu::getMenu(MenuLine * mn, bool st)
+void Menu::getMenu(MenuLine * mn)
 {
-    if (st == true)
+    for (int i = 0; i < SIZE_MENU_LINE; i++)
     {
-        for (int i = 0; i < SIZE_MENU_LINE - 1; i++)
-        {
-            mn[i].line = menu[i].line;
-            mn[i].x =  menu[i].x;
-            mn[i].y = menu[i].y;
-        }
-    }
-    else
-    {
-        mn[10].line = menu[10].line;
-        mn[10].x =  menu[10].x;
-        mn[10].y = menu[10].y;
+        mn[i].line = menu[i].line;
+        mn[i].x =  menu[i].x;
+        mn[i].y = menu[i].y;
     }
 }
 

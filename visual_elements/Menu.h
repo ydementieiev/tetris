@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-const int SIZE_MENU_LINE = 11;
+const int SIZE_MENU_LINE = 13;
 struct MenuLine
 {
     std::string line;
@@ -14,7 +14,7 @@ private:
     MenuLine menu[SIZE_MENU_LINE];
 public:
     Menu();
-    void getMenu(MenuLine * mn, bool st);
+    void getMenu(MenuLine * mn);
     int get_gametime(int);
 };
 

@@ -387,15 +387,15 @@ bool Field::check_first_row_to_the_availability_BLOCK()
     return false;
 }
 
-void Field::show_menu(bool status)
+void Field::show_menu(bool draw_exit_menu)
 {
     Menu menu;
     MenuLine mm[SIZE_MENU_LINE];
-    menu.getMenu(mm, status);
+    menu.getMenu(mm);
 
-    if (status == true)
+    if (draw_exit_menu == true)
     {
-        for (int count = 0; count < SIZE_MENU_LINE - 1; count++)
+        for (int count = 0; count < SIZE_MENU_LINE - 3; count++)
         {
             for (int i = mm[count].y, j = 0; mm[count].line[j] != '\0'; i++, j++)
             {
@@ -403,18 +403,20 @@ void Field::show_menu(bool status)
             }
         }
     }
-    if (status == false)
+    if (draw_exit_menu == false)
     {
         clear_menu_lines();
-        draw_field();
-        for (int i = mm[10].y, j = 0; mm[10].line[j] != '\0'; i++, j++)
-            {
-                FIELD[mm[10].x][i] = mm[10].line[j];
-            }
+        for (int count = 10; count < 13; count++)
+        {
+            for (int i = mm[count].y, j = 0; mm[count].line[j] != '\0'; i++, j++)
+                {
+                    FIELD[mm[count].x][i] = mm[count].line[j];
+                }
+        }
+        
     }
     
 }
-
 
 void Field::clear_menu_lines()
 {
@@ -424,7 +426,5 @@ void Field::clear_menu_lines()
         {
             FIELD[row][column] = SPACE;
         }
-        
     }
-    
 }
