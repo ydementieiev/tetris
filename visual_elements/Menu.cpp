@@ -1,7 +1,10 @@
 #include "Menu.h"
 #include <iostream>
+#include <time.h>
 #include <string>
 int gametime = 0;
+int getTime(int gametime);
+extern unsigned long gamepoints;
 Menu::Menu()
 {
     menu[0].line = "<<< MENU >>>";
@@ -36,14 +39,15 @@ Menu::Menu()
     menu[7].x = 16;
     menu[7].y = 30;
 
-    gametime = get_gametime(gametime);
-    std::string s = std::to_string(gametime);
+    gametime = getTime(gametime);
+    std::string gm_points = std::to_string(gamepoints);
+    std::string gm_time = std::to_string(gametime);
 
-    menu[8].line = s;
+    menu[8].line = gm_time + " second"; //
     menu[8].x = 14;
     menu[8].y = 41;
 
-    menu[9].line = s;
+    menu[9].line = gm_points;
     menu[9].x = 16;
     menu[9].y = 43;
 
@@ -51,11 +55,11 @@ Menu::Menu()
     menu[10].x = 7;
     menu[10].y = 35;
 
-    menu[11].line = "Your gametime: " + s;
+    menu[11].line = "Your gametime: " + gm_time + " second"; //
     menu[11].x = 9;
     menu[11].y = 35;
 
-    menu[12].line = "You have points " + s;
+    menu[12].line = "You have points: " + gm_points;
     menu[12].x = 11;
     menu[12].y = 35;
 }
@@ -70,8 +74,10 @@ void Menu::getMenu(MenuLine * mn)
     }
 }
 
-int Menu::get_gametime(int gm)
+int getTime(int gametime)
 {
-    gm++;
-    return gm;
+    int total;
+    clock_t end = clock() / CLOCKS_PER_SEC;
+    total = end;
+    return total;
 }

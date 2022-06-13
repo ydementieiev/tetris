@@ -17,6 +17,7 @@
 
 const int DELAY = 1000000;
 bool status = true;
+unsigned long gamepoints = 0;
 
 Tetris::Tetris()
 {
@@ -36,6 +37,7 @@ void Tetris::run()
         }
         else
         {
+            gamepoints += 10;
             if (active_figure)
             {
                 delete active_figure;

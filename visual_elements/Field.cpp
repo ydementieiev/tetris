@@ -4,7 +4,7 @@
 #ifdef _WIN32 
 #include <Windows.h>    
 #endif
-
+extern unsigned long gamepoints;
 const char BORDER = 'X';
 const char EMPTY = '.';
 const char BLOCK = '0';
@@ -338,6 +338,7 @@ void Field::clear_lines_and_move_BLOCK_down()
             {
                 clear_one_line(row_);
                 move_field_down_after_clear(row_);
+                gamepoints += 50;
                 clear_lines_and_move_BLOCK_down(); // recursion
             }
         }
@@ -387,13 +388,13 @@ bool Field::check_first_row_to_the_availability_BLOCK()
     return false;
 }
 
-void Field::show_menu(bool draw_exit_menu)
+void Field::show_menu(bool menu_status)
 {
     Menu menu;
     MenuLine mm[SIZE_MENU_LINE];
     menu.getMenu(mm);
 
-    if (draw_exit_menu == true)
+    if (menu_status == true)
     {
         for (int count = 0; count < SIZE_MENU_LINE - 3; count++)
         {
@@ -403,7 +404,7 @@ void Field::show_menu(bool draw_exit_menu)
             }
         }
     }
-    if (draw_exit_menu == false)
+    if (menu_status == false)
     {
         clear_menu_lines();
         for (int count = 10; count < 13; count++)

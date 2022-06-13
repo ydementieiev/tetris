@@ -15,6 +15,5 @@ private:
 public:
     Menu();
     void getMenu(MenuLine * mn);
-    int get_gametime(int);
 };
 

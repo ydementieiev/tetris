@@ -12,7 +12,7 @@ class Field
 public:
     Field();
 
-    void show_menu(bool draw_exit_menu);
+    void show_menu(bool menu_status);
     bool check_first_row_to_the_availability_BLOCK();
 
     void clear_menu_lines();
