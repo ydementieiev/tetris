@@ -352,7 +352,7 @@ void Field::clear_one_line(int row)
     }
 }
 
-void  Field::move_field_down_after_clear(int row)
+void Field::move_field_down_after_clear(int row)
 {
     for (int column = 1; column < COLUMNS - 1; column++)
     {
@@ -371,17 +371,45 @@ void  Field::move_field_down_after_clear(int row)
     }
 }
 
-void Field::show_menu()
+bool Field::check_first_row_to_the_availability_BLOCK()
 {
-    Menu menu;
-    MenuLine mm[SIZE_MENU_LINE];
-    menu.getMenu(mm);
-
-    for (int count = 0; count < SIZE_MENU_LINE; count++)
+    for (int row = 1, column = 1; column < COLUMNS - 1; column++)
     {
-        for (int i = mm[count].y, j = 0; mm[count].line[j] != '\0'; i++, j++)
+        if (FIELD[row][column] == BLOCK)
         {
-            FIELD[mm[count].x][i] = mm[count].line[j];
+            return true;
+        }
+        else
+        {
+            continue;
+        }
+    }   
+    return false;
+}
+
+void Field::show_menu(bool status)
+{
+    Menu menu(status);
+    MenuLine mm[SIZE_MENU_LINE];
+    menu.getMenu(mm, status);
+
+    if (status == true)
+    {
+        for (int count = 0; count < SIZE_MENU_LINE - 1; count++)
+        {
+            for (int i = mm[count].y, j = 0; mm[count].line[j] != '\0'; i++, j++)
+            {
+
+                FIELD[mm[count].x][i] = mm[count].line[j];
+            }
         }
     }
+    else
+    {
+        for (int i = mm[10].y, j = 0; mm[10].line[j] != '\0'; i++, j++)
+            {
+                FIELD[mm[10].x][i] = mm[10].line[j];
+            }
+    }
+    
 }

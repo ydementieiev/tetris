@@ -1,6 +1,9 @@
 #include "Menu.h"
 #include <iostream>
-Menu::Menu()
+#include <string>
+int gametime = 0;
+bool choice = true;
+Menu::Menu(bool choice)
 {
     menu[0].line = "<<< MENU >>>";
     menu[0].x = 0;
@@ -34,14 +37,44 @@ Menu::Menu()
     menu[7].x = 16;
     menu[7].y = 30;
 
+    gametime = get_gametime(gametime);
+    std::string s = std::to_string(gametime);
+
+    menu[8].line = s;
+    menu[8].x = 14;
+    menu[8].y = 41;
+
+    menu[9].line = s;
+    menu[9].x = 16;
+    menu[9].y = 43;
+
+    menu[10].line = "GAME IS OVER, GOOD BYE!";
+    menu[10].x = 9;
+    menu[10].y = 35;
+
 }
 
-void Menu::getMenu(MenuLine * mn)
+void Menu::getMenu(MenuLine * mn, bool st)
 {
-    for (int i = 0; i < SIZE_MENU_LINE; i++)
+    if (st == true)
     {
-        mn[i].line = menu[i].line;
-        mn[i].x =  menu[i].x;
-        mn[i].y = menu[i].y;
+        for (int i = 0; i < SIZE_MENU_LINE - 1; i++)
+        {
+            mn[i].line = menu[i].line;
+            mn[i].x =  menu[i].x;
+            mn[i].y = menu[i].y;
+        }
     }
+    else
+    {
+        mn[10].line = menu[10].line;
+        mn[10].x =  menu[10].x;
+        mn[10].y = menu[10].y;
+    }
+}
+
+int Menu::get_gametime(int gm)
+{
+    gm++;
+    return gm;
 }
